@@ -43,6 +43,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 
 .row {
@@ -59,4 +60,395 @@ body {
 
 .card {
   padding: 2em;
+}
+
+/* Base styles */
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.body-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.nav {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav[data-state="active"] {
+  color: var(--blue);
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.trigger-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.content {
+  flex: 1;
+}
+
+.value {
+  display: block;
+  color: #333;
+}
+
+/* Popover content styles */
+[data-radix-popper-content-wrapper] {
+  z-index: 50 !important;
+}
+
+.city-option {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.city-option:hover {
+  background-color: #f5f5f5;
+}
+
+/* Date inputs */
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+}
+
+/* Traveller counter buttons */
+button {
+  /* border: 1px solid #ddd; */
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: #f5f5f5;
+}
+
+/* Multi-city remove button */
+.remove-city {
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.remove-city:hover {
+  background: #cc0000;
+}
+
+/* Add city button */
+.add-city {
+  color: var(--blue);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.2s;
+}
+
+
+.checkbox-container label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .home {
+    padding: 16px;
+  }
+
+  .row {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .trigger-box {
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 12px;
+  }
+
+  .body-nav {
+    gap: 8px;
+  }
+
+  .nav {
+    padding: 8px 16px;
+    flex: 1;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .trigger-box {
+    min-width: 100%;
+    flex-grow: 1;
+  }
+
+  /* Adjust multi-city remove button position for mobile */
+  .remove-city-container {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 8px;
+  }
+
+  .body-nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav {
+    width: 100%;
+    min-width: auto;
+  }
+
+  /* Make popover full width on mobile */
+  [data-radix-popper-content-wrapper] {
+    width: calc(100% - 16px) !important;
+    transform: none !important;
+    left: 8px !important;
+  }
+
+  /* Adjust date inputs for mobile */
+  input[type="date"] {
+    font-size: 16px;
+    /* Prevent zoom on iOS */
+  }
+
+  /* Adjust traveler counter layout */
+  .traveler-counter {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .counter-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Traveler styles */
+.traveler-section {
+  margin-bottom: 20px;
+}
+
+.traveler-popover-content {
+  min-width: 200px;
+}
+
+.traveler-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.traveler-counter:last-child {
+  margin-bottom: 0;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.counter-controls button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 0;
+}
+
+.counter-controls span {
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Responsive adjustments for travelers */
+@media (max-width: 768px) {
+  .traveler-popover-content {
+    padding: 12px;
+    width: 100%;
+  }
+
+  .traveler-counter {
+    margin-bottom: 20px;
+  }
+
+  .counter-controls button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .traveler-counter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .counter-controls {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .counter-controls button {
+    width: 48px;
+    height: 48px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}
+
+/* Additional responsive improvements */
+.trigger-box svg {
+  flex-shrink: 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+@media (hover: none) {
+
+  /* Better touch targets for mobile */
+  .city-option {
+    padding: 12px 8px;
+  }
+
+  button {
+    min-height: 44px;
+  }
+}
+
+/* Improve popover positioning on mobile */
+@media (max-width: 480px) {
+  [data-radix-popper-content-wrapper] {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.connect {
+  border: 1px solid black;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  margin: 0 -26px;
+  z-index: 1;
+  background-color: #fff;
+}
+
+.connect svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 768px) {
+  .connect {
+    display: none;
+  }
+}
+
+.search-button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.search-button {
+  background-color: #0056b3;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
 }

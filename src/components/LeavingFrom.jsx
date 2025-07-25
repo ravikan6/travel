@@ -13,7 +13,7 @@ export const LeavingFrom = ({ value, onChange }) => {
                     </div>
                 }
                 content={
-                    <div style={{ padding: '8px' }}>
+                    <div>
                         <div onClick={() => onChange('Delhi')}>Delhi</div>
                         <div onClick={() => onChange('Mumbai')}>Mumbai</div>
                         <div onClick={() => onChange('Bangalore')}>Bangalore</div>

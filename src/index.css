@@ -224,6 +224,6 @@ input {
 
 /* Make popover content match trigger width */
 .popover-content {
-  min-width: 200px;
+  min-width: 320px;
   width: 100%;
 }

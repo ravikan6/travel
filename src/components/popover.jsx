@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
-export const Popover = ({ 
-  trigger, 
+export const Popover = ({
+  trigger,
   content,
   side = 'bottom',
   align = 'center'
@@ -13,7 +13,7 @@ export const Popover = ({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        popoverRef.current && 
+        popoverRef.current &&
         !popoverRef.current.contains(event.target) &&
         !triggerRef.current?.contains(event.target)
       ) {
@@ -27,16 +27,16 @@ export const Popover = ({
 
   return (
     <div className="popover-root">
-      <div 
+      <div
         ref={triggerRef}
-        className="popover-trigger" 
+        className="popover-trigger"
         onClick={() => setIsOpen(!isOpen)}
       >
         {trigger}
       </div>
-      
+
       {isOpen && (
-        <div 
+        <div
           ref={popoverRef}
           className={`popover-content ${side} ${align}`}
           role="dialog"
@@ -48,10 +48,3 @@ export const Popover = ({
     </div>
   );
 };
-
-// Popover.propTypes = {
-//   trigger: PropTypes.node.isRequired,
-//   content: PropTypes.node.isRequired,
-//   side: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-//   align: PropTypes.oneOf(['start', 'center', 'end'])
-// }; 

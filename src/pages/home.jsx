@@ -8,7 +8,9 @@ export const HomePage = () => {
     const [type, setType] = useState('one-way');
     const [addStay, setAddStay] = useState(false);
     const [addCar, setAddCar] = useState(false);
-    
+    const [results, setResults] = useState(null);
+    const [loading, setLoading] = useState(false);
+
     // Centralized state for travel data
     const [travelData, setTravelData] = useState([{
         from: '',
@@ -46,11 +48,19 @@ export const HomePage = () => {
         }
     };
 
+    const handleSearch = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            setResults('No results found');
+        }, 1000);
+    }
+
     return (
         <div className="home">
             <div className="body-nav">
-                <button 
-                    className="nav" 
+                <button
+                    className="nav"
                     data-state={type === 'return' ? 'active' : ''}
                     onClick={() => {
                         setType('return');
@@ -59,8 +69,8 @@ export const HomePage = () => {
                 >
                     Return
                 </button>
-                <button 
-                    className="nav" 
+                <button
+                    className="nav"
                     data-state={type === 'one-way' ? 'active' : ''}
                     onClick={() => {
                         setType('one-way');
@@ -69,8 +79,8 @@ export const HomePage = () => {
                 >
                     One Way
                 </button>
-                <button 
-                    className="nav" 
+                <button
+                    className="nav"
                     data-state={type === 'multi-city' ? 'active' : ''}
                     onClick={() => setType('multi-city')}
                 >
@@ -78,8 +88,8 @@ export const HomePage = () => {
                 </button>
             </div>
 
-            <div style={{}}>
-                {type === 'multi-city' && travelData.length > 0 && 
+            {type === 'multi-city' && travelData.length > 0 && (
+                <div className="traveler-section">
                     <Travellers
                         data={travelData[0]}
                         onChange={(field, value) => {
@@ -88,20 +98,24 @@ export const HomePage = () => {
                             });
                         }}
                     />
-                }
-            </div>
-            
+                </div>
+            )}
+
             {travelData.map((data, index) => (
-                <div key={index} className="row" style={{ position: 'relative' }}>
-                    <LeavingFrom 
+                <div key={index} className="row">
+                    {/* <div className="row" style={{ gap: 0, marginBottom: 0 }}> */}
+                    <LeavingFrom
                         value={data.from}
                         onChange={(value) => updateTravelData(index, 'from', value)}
                     />
-                    <GoingTo 
+                    <div className="connect">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="lucide lucide-arrow-right-left-icon lucide-arrow-right-left"><path d="m16 3 4 4-4 4" /><path d="M20 7H4" /><path d="m8 21-4-4 4-4" /><path d="M4 17h16" /></svg>                        </div>
+                    <GoingTo
                         value={data.to}
                         onChange={(value) => updateTravelData(index, 'to', value)}
                     />
-                    <DateComp 
+                    {/* </div> */}
+                    <DateComp
                         type={type}
                         departDate={data.departDate}
                         returnDate={data.returnDate}
@@ -117,53 +131,60 @@ export const HomePage = () => {
                         />
                     )}
                     {type === 'multi-city' && travelData.length > 1 && (
-                        <button
-                            onClick={() => removeCity(index)}
-                            style={{
-                                position: 'absolute',
-                                right: '-40px',
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                padding: '4px 8px'
-                            }}
-                        >
-                            ✕
-                        </button>
+                        <div className="remove-city-container">
+                            <button
+                                className="remove-city"
+                                onClick={() => removeCity(index)}
+                                aria-label="Remove city"
+                            >
+                                ✕
+                            </button>
+                        </div>
                     )}
                 </div>
             ))}
 
-            {type === 'multi-city' && travelData.length < 5 && (
-                <button 
-                    onClick={addNewCity}
-                    style={{ marginTop: '16px', padding: '8px 16px' }}
-                >
-                    Add Another City
-                </button>
-            )}
+            <div className="search-button-container">
+                {type === 'multi-city' && travelData.length < 5 && (
+                    <button
+                        onClick={addNewCity}
+                        className="add-city"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                        Add Another City
+                    </button>
+                )}
 
-            {type === 'one-way' && (
-                <div style={{ marginTop: '20px' }}>
-                    <label>
-                        <input 
-                            type="checkbox" 
-                            checked={addStay}
-                            onChange={(e) => setAddStay(e.target.checked)}
-                        /> Add place to stay
-                    </label>
+                {(type === 'one-way' || type === 'return') && (
+                    <div className="checkbox-container">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={addStay}
+                                onChange={(e) => setAddStay(e.target.checked)}
+                            />
+                            Add place to stay
+                        </label>
+                    </div>
+                )}
+                {type === 'return' && (
+                    <div className="checkbox-container">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={addCar}
+                                onChange={(e) => setAddCar(e.target.checked)}
+                            />
+                            Add a car
+                        </label>
+                    </div>
+                )}
+                <div style={{ width: '50%', display: 'flex', justifyContent: 'flex-start', marginLeft: 'auto' }}>
+                    <button onClick={handleSearch} className="search-button">Search</button>
                 </div>
-            )}
-            {type === 'return' && (
-                <div style={{ marginTop: '20px' }}>
-                    <label>
-                        <input 
-                            type="checkbox" 
-                            checked={addCar}
-                            onChange={(e) => setAddCar(e.target.checked)}
-                        /> Add a car
-                    </label>
-                </div>
-            )}
+            </div>
+            {loading && <div>Loading...</div>}
+            {results && <div>{results}</div>}
         </div>
     )
 }

@@ -33,61 +33,52 @@ export const Travellers = ({ data, onChange }) => {
         }
     };
 
+    const TravellerCounter = ({ title, subtitle, value, type }) => (
+        <div className="traveler-counter">
+            <div>
+                <div>{title}</div>
+                <div className="subtitle">{subtitle}</div>
+            </div>
+            <div className="counter-controls">
+                <button onClick={() => updateCount(type, 'subtract')}>-</button>
+                <span>{value}</span>
+                <button onClick={() => updateCount(type, 'add')}>+</button>
+            </div>
+        </div>
+    );
+
     return (
-        <>
-            <Popover
-                trigger={
-                    <div className="trigger-box">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                        <div className="content">
-                            <span className="value">{getTotalTravellers()}</span>
-                        </div>
+        <Popover
+            trigger={
+                <div className="trigger-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                    <div className="content">
+                        <span className="value">{getTotalTravellers()}</span>
                     </div>
-                }
-                content={
-                    <div style={{ padding: '16px', minWidth: '250px' }}>
-                        <div style={{ marginBottom: '12px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                                <div>
-                                    <div>Adults</div>
-                                    <div style={{ fontSize: '12px', color: '#666' }}>Age 13+</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <button onClick={() => updateCount('adults', 'subtract')} style={{ padding: '4px 8px' }}>-</button>
-                                    <span>{data.adults}</span>
-                                    <button onClick={() => updateCount('adults', 'add')} style={{ padding: '4px 8px' }}>+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={{ marginBottom: '12px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                                <div>
-                                    <div>Children</div>
-                                    <div style={{ fontSize: '12px', color: '#666' }}>Age 2-12</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <button onClick={() => updateCount('children', 'subtract')} style={{ padding: '4px 8px' }}>-</button>
-                                    <span>{data.children}</span>
-                                    <button onClick={() => updateCount('children', 'add')} style={{ padding: '4px 8px' }}>+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                                <div>
-                                    <div>Infants</div>
-                                    <div style={{ fontSize: '12px', color: '#666' }}>Under 2</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <button onClick={() => updateCount('infants', 'subtract')} style={{ padding: '4px 8px' }}>-</button>
-                                    <span>{data.infants}</span>
-                                    <button onClick={() => updateCount('infants', 'add')} style={{ padding: '4px 8px' }}>+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            />
-        </>
+                </div>
+            }
+            content={
+                <div className="traveler-popover-content">
+                    <TravellerCounter
+                        title="Adults"
+                        subtitle="Age 13+"
+                        value={data.adults}
+                        type="adults"
+                    />
+                    <TravellerCounter
+                        title="Children"
+                        subtitle="Age 2-12"
+                        value={data.children}
+                        type="children"
+                    />
+                    <TravellerCounter
+                        title="Infants"
+                        subtitle="Under 2"
+                        value={data.infants}
+                        type="infants"
+                    />
+                </div>
+            }
+        />
     )
 } 
