@@ -1,0 +1,52 @@
+#root {
+  max-width: 1280px;
+  margin: 20px auto;
+  width: 100%;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 10px;
+}
+
+header {
+  height: 40px;
+  border-bottom: 1px solid rgb(180, 180, 180);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav {
+  color: black;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.nav[data-state=active] {
+  color: var(--blue);
+}
+
+body {
+  background: #fff;
+  margin: 0;
+}
+
+.body-nav {
+  border-bottom: 2px solid rgb(185, 185, 185);
+  display: inline-flex;
+  gap: 20px;
+}
+
+.home {
+  min-height: 500px;
+  padding: 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
