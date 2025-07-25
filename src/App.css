@@ -38,7 +38,7 @@ body {
 }
 
 .home {
-  min-height: 500px;
+  min-height: 300px;
   padding: 20px;
   display: flex;
   flex-direction: column;
