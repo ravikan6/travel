@@ -3,7 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -49,6 +49,7 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
+  padding: 8px;
 }
 
 button:hover {
@@ -81,4 +82,148 @@ input {
   border-radius: 10px;
   border: 1px solid black;
   outline: none;
+}
+
+/* Popover styles */
+.popover-root {
+  position: relative;
+  display: inline-block;
+}
+
+.popover-trigger {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.popover-content {
+  position: absolute;
+  z-index: 50;
+  min-width: 200px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid rgb(229, 231, 235);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem;
+  animation: popoverScale 0.2s ease-out;
+}
+
+/* Positioning classes */
+.popover-content.bottom {
+  top: calc(100% + 5px);
+}
+
+.popover-content.top {
+  bottom: calc(100% + 5px);
+}
+
+.popover-content.left {
+  right: calc(100% + 5px);
+}
+
+.popover-content.right {
+  left: calc(100% + 5px);
+}
+
+/* Alignment classes */
+.popover-content.center {
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.popover-content.start {
+  left: 0;
+}
+
+.popover-content.end {
+  right: 0;
+}
+
+/* Animation */
+@keyframes popoverScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Popover content styles */
+.popover-content div {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.popover-content div:hover {
+  background-color: #f1f5f9;
+}
+
+/* Trigger Box styles */
+.trigger-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  min-width: 200px;
+  transition: all 0.2s ease;
+}
+
+.trigger-box:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.trigger-box:focus {
+  outline: none;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.1);
+}
+
+.trigger-box .icon {
+  color: #64748b;
+  width: 20px;
+  height: 20px;
+}
+
+.trigger-box .content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trigger-box .label {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.trigger-box .value {
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+/* Row Layout */
+.row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.trigger-box {
+  min-width: 200px;
+}
+
+/* Make popover content match trigger width */
+.popover-content {
+  min-width: 200px;
+  width: 100%;
 }

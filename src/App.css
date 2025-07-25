@@ -34,11 +34,21 @@ body {
   border-bottom: 2px solid rgb(185, 185, 185);
   display: inline-flex;
   gap: 20px;
+  max-width: fit-content;
 }
 
 .home {
   min-height: 500px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
